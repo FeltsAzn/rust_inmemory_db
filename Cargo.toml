@@ -1,0 +1,9 @@
+[package]
+name = "inmemory_db"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+threadpool = "1.8.1"
+futures = { version = "0.3.30", features = ["thread-pool"] }
+regex = "1.10.4"

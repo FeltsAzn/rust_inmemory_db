@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>POST form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label, input[type="text"], input[type="number"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            const request = document.getElementById("request").value;
+            const key = document.getElementById("key").value;
+            const value = document.getElementById("value").value;
+
+            const data = {
+                request: request,
+                key: key,
+                value: value, // assumes value is integer
+            };
+
+            fetch('/some_endpoint', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</head>
+<body>
+<form onsubmit="submitForm(event)">
+    <label for="request">Request:</label>
+    <input id="request" name="request" type="text">
+
+    <label for="key">Key:</label>
+    <input id="key" name="key" type="text">
+
+    <label for="value">Value:</label>
+    <input id="value" name="value" type="text">
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
